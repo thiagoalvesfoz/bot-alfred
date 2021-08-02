@@ -1,0 +1,16 @@
+{
+  "name": "alfred",
+  "version": "1.0.0",
+  "description": "Um bot para o Ousadia e Alegria",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Thiago Alves Oliveira",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0"
+  }
+}
