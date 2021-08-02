@@ -1,8 +1,14 @@
+const fns = require('date-fns')
+const ll = require('date-fns/locale')
+
 const Discord = require('discord.js')
+
+
+const format = (date) => fns.formatDistance(date, new Date(), { addSuffix: true, locale: ll.ptBR })
 
 module.exports = {
 
-  run: function (client, message, args) {
+  run: async (client, message, args) => {
     const inline = true
     const botAvatar = client.user.displayAvatarURL
     const date = client.user.createdAt
@@ -22,6 +28,8 @@ module.exports = {
       .addField('**Meu ID**', client.user.id)
       .addField('**Servidores**', `🛡 ${servsize}`, true)
       .addField('**Usuários**', `${usersize}`, inline)
+      .addField('**Estou online a**', format(client.startTime))
+      .addField('**Criado em**', fns.format(date, "dd/MM/yyyy', às 'HH:mm:ss" ))
       .setFooter(`2021 © ${client.user.username}.`)
       .setTimestamp()
 
@@ -37,12 +45,10 @@ module.exports = {
     message.channel.send(embed)
   },
 
-  get help () {
-    return {
-      name: 'botinfo',
-      category: 'Info',
-      description: 'Mostra informações do bot.',
-      usage: 'botinfo'
-    }
+  help: {
+    name: 'botinfo',
+    category: 'Info',
+    description: 'Mostra informações do bot.',
+    usage: 'botinfo'
   }
 }

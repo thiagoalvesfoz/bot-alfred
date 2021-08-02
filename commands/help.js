@@ -1,6 +1,6 @@
 module.exports = {
 
-  run: (client, message, args) => {
+  run: async (client, message, args) => {
     
     const embed = {
       color: 0xB1103C,
@@ -27,7 +27,7 @@ module.exports = {
     message.author.send({
       embed: embed
     })
-      .then(() => message.react('⚡'))
+      .then(() => message.react('⚡')) // reagir
       .catch(() => message.reply('eu não tenho permissões para enviar DM para você 😥'))
 
   },
