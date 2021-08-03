@@ -1,3 +1,4 @@
 node_modules/
+records/
 .env
 *-lock.json
