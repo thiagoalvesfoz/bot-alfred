@@ -20,9 +20,7 @@ module.exports = {
     });   
 
     const writer = receiver.pipe(fs.createWriteStream(fileName));
-    writer.on("finish", () => {
-      message.member.voice.channel.leave();
-      
+    writer.on("finish", () => {    
       convertToWav(fileName, fileWav);
 
       message.channel.send(`${user} disse:`, {
