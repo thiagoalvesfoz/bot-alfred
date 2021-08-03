@@ -7,9 +7,7 @@
 Após ter clonado o repositório e extraído todos os arquivos. execute o seguinte comando no diretorio dos arquivos:
 
 ```sh
-$ npm install
-ou
-$ yarn
+npm install && npm start
 ```
 
 Crie um arquivo com o nome de **.env** seguindo o exemplo do **.env.example**
