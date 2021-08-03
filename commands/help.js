@@ -16,7 +16,7 @@ module.exports = {
     let commands = client.commands
 
     commands.forEach(command => {
-      if (command.alias) return
+      if (command.alias || command.help.name === 'bah') return
       embed.fields.push({
         name: `**${client.config.prefix}${command.help.name}**`,
         value: `*Descrição*: ${command.help.description}
