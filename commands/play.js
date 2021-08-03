@@ -6,7 +6,13 @@ module.exports = {
 
     const fileWav = `${client.config.record + message.author.id}.wav`;
 
-    if (!fs.existsSync(fileWav)) return message.channel.send("Calma la, você precisa gravar um áudio primeiro. ")
+    if (!fs.existsSync(fileWav)) {
+      const embed = new Discord.MessageEmbed()
+        .setAuthor("Calma la, você precisa gravar um áudio primeiro.")
+        .setColor("#ED4245");
+
+      return message.channel.send(embed);
+    }
     
     const user = client.users.cache.get(message.author.id);
     
