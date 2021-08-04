@@ -7,6 +7,7 @@ const config = require("./config.json");
 
 client.config = config;
 client.startTime = Date.now();
+client.config.timeoutID = undefined;
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);

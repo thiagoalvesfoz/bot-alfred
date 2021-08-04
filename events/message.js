@@ -9,10 +9,6 @@
   //  ignora qualquer mensagem que não começe com o prefixo escolhido do bot ou não seja bah
   if (message.content.indexOf(client.config.prefix) !== 0 && !bah) return;
 
-  if (!bah) {
-    
-  }
-
   let args = null
 
   // separa o nome do comando de seus argumentos que são passados ao comando em si.
