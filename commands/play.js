@@ -1,22 +1,36 @@
+const Discord = require('discord.js')
 const fs = require('fs')
+
+const { getUserFromMention } = require('../utils/getUserFromMention')
+const { convertPcmToWav } = require('../utils/convertPcmToWav')
 
 module.exports = {
 
   run: async (client, message, args) => {
-
+    
     const fileWav = `${client.config.record + message.author.id}.wav`;
-
+    const fileName = `${client.config.record + message.author.id}.pcm`;
+    
     if (!fs.existsSync(fileWav)) {
-      const embed = new Discord.MessageEmbed()
+      
+      if (fs.existsSync(fileName)) {
+        convertPcmToWav(fileName, fileWav);
+      }
+      else {
+        const embed = new Discord.MessageEmbed()
         .setAuthor("Calma la, você precisa gravar um áudio primeiro.")
         .setColor("#ED4245");
 
-      return message.channel.send(embed);
+        return message.channel.send(embed);
+      }      
     }
     
     const user = client.users.cache.get(message.author.id);
+    const mentions = args.map(mention => getUserFromMention(mention, client)).join();
+    const msgWithMentions = `${user} disse para ${mentions}:`
+    const msg = `${user} disse:`
     
-    return message.channel.send(`${user} disse:`, {
+    return message.channel.send(!!mentions ? msgWithMentions : msg, {
       files: [fileWav]
     });
 
@@ -29,27 +43,3 @@ module.exports = {
     category: 'gravação'
   }
 }
-
-/**
- *  Em análise
- */
-
-// function converter(source) {
-//     try {
-//       var process = new ffmpeg(source)
-//       process.then(function (audio) {
-//       audio.fnExtractSoundToMP3('./audio.mp3', function (error, file) {
-//         if (!error) console.log('Audio File: ' + file);
-//         else console.error(error)
-//         });
-//       }, function (err) {
-//         console.log('Error: ' + err);      
-//       });
-//     } catch (e) {
-//       console.log(e);
-//     }
-    
-//     // valid converts
-//     // ffmpeg -f s16le -ar 48k -ac 2 -i ./recorded-425893864461565953.pcm converted.mp3 
-//     // ffmpeg -i ./recorded-425893864461565953.pcm -vn -ar 44100 -ac 2 -ab 192 -f s16le mp3 audio.mp3
-// }

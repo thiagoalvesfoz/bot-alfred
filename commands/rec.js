@@ -2,6 +2,9 @@ const Discord = require('discord.js')
 const fs = require('fs')
 var wav 	= require('wav');
 
+const { getUserFromMention } = require('../utils/getUserFromMention')
+const { convertPcmToWav } = require('../utils/convertPcmToWav')
+
 module.exports = {
 
   run: async (client, message, args) => {
@@ -15,11 +18,17 @@ module.exports = {
       
       return message.channel.send(embed);
     }
-    
-    // Pega a tag do usuário
-    const user = client.users.cache.get(message.author.id);
+
     const fileName = `${client.config.record + message.author.id}.pcm`;
     const fileWav = `${client.config.record + message.author.id}.wav`;
+
+
+    // Pega a tag do usuário e as menções
+    const user = client.users.cache.get(message.author.id);
+    const mentions = args.map(mention => getUserFromMention(mention, client)).join();
+    const msgWithMentions = `${user} disse para ${mentions}:`
+    const msg = `${user} disse:`
+
 
     const connection = await message.member.voice.channel.join();
     const receiver = connection.receiver.createStream(message.member, {
@@ -29,9 +38,9 @@ module.exports = {
 
     const writer = receiver.pipe(fs.createWriteStream(fileName));
     writer.on("finish", () => {    
-      convertToWav(fileName, fileWav);
+      convertPcmToWav(fileName, fileWav);
 
-      message.channel.send(`${user} disse:`, {
+      message.channel.send(!!mentions ? msgWithMentions : msg, {
         files: [ fileWav ]
       });
     });
@@ -44,23 +53,4 @@ module.exports = {
     usage: 'rec',
     category: 'gravação'
   }
-}
-
-const convertToWav = async (source, destination) => {
-
-    const stream = fs.createReadStream(source);
-
-    var file_out = new wav.FileWriter(destination, {
-      "channels": 1,
-      "sampleRate": 48000,
-      "bitDepth": 32
-    })
-      .on('error', function(err){
-        console.error(err);
-      })
-      .on('finish', function(){
-        console.log('LOG: arquivo gravado com sucesso!')
-      });	
-    
-    stream.pipe(file_out);  
 }
