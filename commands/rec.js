@@ -42,7 +42,7 @@ module.exports = {
       const writer = receiver.pipe(fs.createWriteStream(fileName));
       writer.on("finish", () => {    
         convertPcmToWav(fileName, fileWav);
-
+        message.member.voice.channel.leave();
         message.channel.send(!!mentions ? msgWithMentions : msg, {
           files: [ fileWav ]
         });
