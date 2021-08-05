@@ -2,5 +2,10 @@
   "prefix": "oa.",
   "game": "help",
   "record": "./records/",
-  "ownerID": "425893864461565953"
+  "ownerID": "425893864461565953",
+  "channels": {
+    "general": "870201023925485622",
+    "register": "870368583698497596",
+    "colors": "870368334338736148"
+  }
 }
