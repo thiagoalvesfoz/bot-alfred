@@ -1,19 +1,18 @@
-const Discord = require('discord.js')
+const embed  = require('../utils/setErrorMessage');
 
 module.exports = {
 
   run: async (client, message, args) => {
 
-    const voicechannel = message.member.voice.channel;
+    const inSameChannel = client.voice.connections.some(
+      (connection) => connection.channel.id === message.member.voice.channelID
+    )
 
-    if (!voicechannel) {
+    if (!inSameChannel)
+      return embed.sendErrorMessage(message, {
+        title: 'Você precisa estar no mesmo canal que o bot!'
+      });
 
-      const embed = new Discord.MessageEmbed()
-        .setAuthor("Você deve estar conectado a um canal de voz antes de usar este comando!")
-        .setColor("#ED4245");
-
-      return message.channel.send(embed);
-    }
 
     message.member.voice.channel.leave();
   },

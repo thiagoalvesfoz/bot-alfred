@@ -1,6 +1,5 @@
-const Discord = require('discord.js')
 const fs = require('fs')
-
+const embed  = require('../utils/setErrorMessage');
 const { getUserFromMention } = require('../utils/getUserFromMention')
 const { convertPcmToWav } = require('../utils/convertPcmToWav')
 
@@ -17,11 +16,9 @@ module.exports = {
         convertPcmToWav(fileName, fileWav);
       }
       else {
-        const embed = new Discord.MessageEmbed()
-        .setAuthor("Calma la, você precisa gravar um áudio primeiro.")
-        .setColor("#ED4245");
-
-        return message.channel.send(embed);
+        return embed.sendErrorMessage(message, {
+          title: "Calma la, você precisa gravar um áudio primeiro."
+        });
       }      
     }
     

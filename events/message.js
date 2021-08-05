@@ -26,6 +26,6 @@
   // Se esse comando não existir, não faz nada
   if (!cmd) return;
 
-  console.log('LOG', `${message.author.username} (${message.author.id}) executou o comando: ${cmd.help.name}`)
+  console.log('INFO', `${message.author.username} (${message.author.id}) executou o comando: ${cmd.help.name}`)
   cmd.run(client, message, args);
 }

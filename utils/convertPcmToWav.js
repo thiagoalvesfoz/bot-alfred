@@ -1,21 +1,18 @@
 const fs = require('fs')
-var wav 	= require('wav');
+var wav = require('wav');
 
 exports.convertPcmToWav = (source, destination) => {
-  console.log('LOG: convertendo audio...')
+  console.log('INFO', 'Convertendo PCM para WAV');
   const stream = fs.createReadStream(source);
 
   var file_out = new wav.FileWriter(destination, {
-    "channels": 1,
+    "channels": 2,
     "sampleRate": 48000,
-    "bitDepth": 32
+    "bitDepth": 16
   })
-    .on('error', function(err){
-      console.error(err);
-    })
-    .on('finish', function(){
-      console.log('LOG: arquivo gravado com sucesso!')
-    });	
   
-  stream.pipe(file_out);  
+  stream.pipe(file_out).on('end', () => {
+    file_out.end()
+    console.log('INFO', 'Conversão realizada com sucesso!')
+  });
 }
