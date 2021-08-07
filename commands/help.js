@@ -1,6 +1,7 @@
 module.exports = {
 
   run: async (client, message, args) => {
+    const { name } = message.guild;
     
     const embed = {
       color: 0xB1103C,
@@ -8,7 +9,7 @@ module.exports = {
       description: '[Clique aqui para ir até o repositório onde eu estou =)](https://github.com/thiagoalvesfoz/bot-alfred)',
       timestamp: new Date(),
       footer: {
-        text: '2021 ® Alfred - Só Ousadia e Alegria'
+        text: `2021 ® Alfred - ${name}`
       },
       fields: []
     }

@@ -4,6 +4,7 @@
   
   client.user.setActivity(
     client.config.prefix + 
-    client.config.game
+    client.config.game, 
+    { type: 'WATCHING' }
   );
 }
