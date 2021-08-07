@@ -9,7 +9,7 @@ module.exports = {
     
     if (!!client) {
       return embed.sendErrorMessage(message, {
-        title: "Essa funcionalidade foi desabilitada temporariamente até resolver o problema com mic moreira"
+        title: "Essa funcionalidade foi desabilitada temporariamente até resolver o problema com mic do moreira"
       });
     }
     
