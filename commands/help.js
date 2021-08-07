@@ -24,7 +24,7 @@ module.exports = {
       })
     })
 
-    message.author.send({
+    message.channel.send({
       embed: embed
     })
       .then(() => message.react('⚡')) // reagir
