@@ -7,6 +7,12 @@ module.exports = {
 
   run: async (client, message, args) => {
     
+    if (!!client) {
+      return embed.sendErrorMessage(message, {
+        title: "Essa funcionalidade foi desabilitada temporariamente até resolver o problema com mic moreira"
+      });
+    }
+    
     const fileWav = `${client.config.record + message.author.id}.wav`;
     const fileName = `${client.config.record + message.author.id}.pcm`;
     

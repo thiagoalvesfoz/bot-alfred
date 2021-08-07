@@ -7,6 +7,12 @@ module.exports = {
 
   run: async (client, message, args) => {
 
+    if (!!client) {
+      return embed.sendErrorMessage(message, {
+        title: "Essa funcionalidade foi desabilitada temporariamente até resolver o problema com mic moreira"
+      });
+    }
+
     const voicechannel = message.member.voice.channel;
 
     if (!voicechannel) {
