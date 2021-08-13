@@ -1,28 +1,31 @@
-// O Evento message é emitido toda vez que o bot recebe uma mensagem.
+const { getUserFromMention } = require('../utils/getUserFromMention')
 
  module.exports = async (client, message) => {
   // ignore todos os bots
   if (message.author.bot) return;
 
-  const bah = message.content.toLowerCase() === 'bah';
-
+  const msg = message.content.toLowerCase();
+  const sulista = msg.match(/(\bBAH\b)|(\bBÁH\b)/ig) || msg.match(/(\bPIA\b)|(\bPIÁ\B)|(\bPIAZADA\b)/ig)
+  
   //  ignora qualquer mensagem que não começe com o prefixo escolhido do bot ou não seja bah
-  if (message.content.indexOf(client.config.prefix) !== 0 && !bah) return;
+  if (message.content.indexOf(client.config.prefix) !== 0 && !!!sulista) return;
 
   let args = null
-
-  // separa o nome do comando de seus argumentos que são passados ao comando em si.
-  if (!bah) {
-    args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
-  } else {
-    args = Array.of(message.content.toLowerCase())
+  // Executa esse comando se o texto contem uma palavra sulista
+  if (sulista) {
+    const keyword = sulista[0].normalize('NFD').replace(/[\u0300-\u036f]/g, "").substring(0, 3);
+    args = [ keyword ]
   }
 
+  // separa o nome do comando de seus argumentos que são passados ao comando em si.
+  else args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
+
+  console.log(args);
   const command = args.shift().toLowerCase();
 
   // se o comando existir ele irá ser executado.
   const cmd = client.commands.get(command);
-
+  console.log("comando existe ?", !!cmd);
   // Se esse comando não existir, não faz nada
   if (!cmd) return;
 

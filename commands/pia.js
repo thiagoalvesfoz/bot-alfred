@@ -5,20 +5,20 @@ module.exports = {
 
   run: async (client, message, args) => {
     if(message.content.startsWith('oa.')) return;
-
-    const word = keywords.RS[Math.floor(Math.random() * keywords.RS.length)];
+      
+    const word = keywords.PR[Math.floor(Math.random() * keywords.PR.length)];
     
     const embed = new Discord.MessageEmbed()
-      .setAuthor(`${word} 🧉`)
+      .setAuthor(`${word}`)
       .setColor(message.member ? message.member.displayColor : global.CLIENT_DEFAULT_COLOR)
 
-    message.channel.send(embed).then(() => message.react('🧉')).catch(console.error);
+    message.channel.send(embed).catch(console.error);
   },
 
   help: {
-    name: "bah",
-    description: "responde tchê quando alguem falar bah",
-    usage: 'bah',
+    name: "pia",
+    description: "responde tesão pia quando alguem digitar pia",
+    usage: 'pia',
     category: 'sulista'
   }
 
