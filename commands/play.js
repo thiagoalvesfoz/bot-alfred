@@ -7,14 +7,14 @@ module.exports = {
 
   run: async (client, message, args) => {
     
-    if (!!client) {
-      return embed.sendErrorMessage(message, {
-        title: "Essa funcionalidade foi desabilitada temporariamente até resolver o problema com mic do moreira"
-      });
-    }
+    // if (!!client) {
+    //   return embed.sendErrorMessage(message, {
+    //     title: "Essa funcionalidade foi desabilitada temporariamente até resolver o problema com mic do moreira"
+    //   });
+    // }
     
-    const fileWav = `${client.config.record + message.author.id}.wav`;
-    const fileName = `${client.config.record + message.author.id}.pcm`;
+    const fileName = `${process.cwd()}/${message.author.id}.pcm`;
+    const fileWav = `${process.cwd()}/${message.author.id}.wav`;
     
     if (!fs.existsSync(fileWav)) {
       
@@ -41,7 +41,7 @@ module.exports = {
 
   help: {
     name: "play",
-    description: "Envia sua voz no chat",
+    description: "Envia sua voz linda no chat",
     usage: 'play',
     category: 'gravação'
   }

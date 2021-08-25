@@ -4,11 +4,11 @@ module.exports = {
 
   run: async (client, message, args) => {
 
-    if (!!client) {
-      return embed.sendErrorMessage(message, {
-        title: "Essa funcionalidade foi desabilitada temporariamente até resolver o problema com mic do moreira"
-      });
-    }
+    // if (!!client) {
+    //   return embed.sendErrorMessage(message, {
+    //     title: "Essa funcionalidade foi desabilitada temporariamente até resolver o problema com mic do moreira"
+    //   });
+    // }
 
     const inSameChannel = client.voice.connections.some(
       (connection) => connection.channel.id === message.member.voice.channelID

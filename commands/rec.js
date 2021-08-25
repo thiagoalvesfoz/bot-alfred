@@ -7,11 +7,11 @@ module.exports = {
 
   run: async (client, message, args) => {
 
-    if (!!client) {
-      return embed.sendErrorMessage(message, {
-        title: "Essa funcionalidade foi desabilitada temporariamente até resolver o problema com mic do moreira"
-      });
-    }
+    // if (!!client) {
+    //   return embed.sendErrorMessage(message, {
+    //     title: "Essa funcionalidade foi desabilitada temporariamente até resolver o problema com mic do moreira"
+    //   });
+    // }
 
     const voicechannel = message.member.voice.channel;
 
@@ -28,8 +28,9 @@ module.exports = {
 
     message.react('🎙️');
 
-    const fileName = `${process.cwd() + message.author.id}.pcm`;
-    const fileWav = `${process.cwd()+ message.author.id}.wav`;
+    const fileName = `${process.cwd()}/${message.author.id}.pcm`;
+    const fileWav = `${process.cwd()}/${message.author.id}.wav`;
+    console.log("diretorio", fileWav);
 
 
     // Pega a tag do usuário e as menções
