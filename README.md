@@ -7,7 +7,7 @@
 Após ter clonado o repositório e extraído todos os arquivos. execute o seguinte comando no diretorio dos arquivos:
 
 ```sh
-npm install && npm start
+npm install
 ```
 
 Crie um arquivo com o nome de **.env** seguindo o exemplo do **.env.example**
@@ -19,4 +19,8 @@ Crie um arquivo com o nome de **.env** seguindo o exemplo do **.env.example**
 
 Demais configurações estão no arquivo **config.json**  
 
-Feito isso, você poderá iniciar seu bot utilizando o seguinte comando:
+Feito isso, você poderá iniciar seu bot utilizando o seguinte comando: 
+
+```sh
+npm start
+```
